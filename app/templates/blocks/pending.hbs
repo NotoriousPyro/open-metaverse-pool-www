@@ -1,0 +1,34 @@
+{{#if model.candidates}}
+<div class="table-responsive">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Height</th>
+        <th>Time Found</th>
+        <th>Variance</th>
+        <th>Reward</th>
+        <th style="width: 50%;">Block Hash</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model.candidates as |block|}}
+      <tr>
+        <td>{{format-number block.height}}</td>
+        <td>{{format-date-locale block.timestamp}}</td>
+        <td>
+          {{#if block.isLucky}}
+          <span class="label label-success">{{format-number block.variance}}&#37;</span>
+          {{else}}
+          <span class="label label-primary">{{format-number block.variance}}&#37;</span>
+          {{/if}}
+        </td>
+        <td><span class="label label-default">PENDING</span></td>
+        <td></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+{{else}}
+<h3>No new blocks yet</h3>
+{{/if}}

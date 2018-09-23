@@ -1,0 +1,40 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="alert alert-info" id="top-info">
+            <div class="row">
+                <div class="col-md-4 stats">
+                    <div><i class="fa fa-users"></i> Miners Online: <span id="poolHashrate">{{format-number model.minersTotal}}</span></div>
+                    <div><i class="fa fa-gears"></i> Total Workers: <span id="poolHashrate">{{applicationController.totalWorkers}}</span></div>
+                    <div><i class="fa fa-tachometer"></i> Pool Hash Rate: <span id="poolHashrate">{{format-hashrate model.hashrate}}</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mainbody">
+    {{partial "alerts"}}
+    {{#if model.miners}}
+    <div class="table-responsive">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Miner</th>
+                    <th>Hashrate (1hr average)</th>
+                    <th>Last share</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#each model.miners as |m|}}
+            <tr class="{{if m.offline "danger" "success"}}">
+                <td>{{#link-to 'account' (scroll-to '#top') m.login class='hash'}}{{m.login}}{{/link-to}}</td>
+                <td>{{format-hashrate m.hr}}</td>
+                <td>{{format-relative (seconds-to-ms m.lastBeat)}}</td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{else}}
+    <h4>No miners</h4>
+    {{/if}}
+</div>

@@ -1,0 +1,48 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="alert alert-info" id="top-info">
+            <div class="row">
+                <div class="col-md-4 stats">
+                    {{#if model.payments}}<div><i class="fa fa-paper-plane-o"></i>Total Payments Sent: <span id="poolHashrate">{{model.paymentsTotal}}</span></div>{{/if}}
+                    <div><i class="fa fa-clock-o"></i>Next Payment Cycle: <span id="poolHashrate">{{format-relative (seconds-to-ms nextPaymentETA) units="minute"}}</span></div>
+                </div>
+            </div>
+            {{partial "paymentinfo"}}
+        </div>
+    </div>
+</div>
+<div class="container mainbody">
+    {{partial "alerts"}}
+    {{#if model.payments}}
+    <div class="table-responsive">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Amount</th>
+                    <th>Address</th>
+                    <th>Transaction ID</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#each model.payments as |tx|}}
+                <tr>
+                    <td>{{format-date-locale tx.timestamp}}</td>
+                    <td>{{format-number tx.formatAmount minimumFractionDigits='8'}}</td>
+                    <td>
+                        <!--<a href="http://mymvs.info/address/{{tx.address}}" class="hash" rel="nofollow" target="_blank">{{tx.address}}</a>-->
+                        <a href="https://explorer.mvs.org/#!/adr/{{tx.address}}" class="hash" rel="nofollow" target="_blank">{{tx.address}}</a>
+                    </td>
+                    <td>
+                        <!--<a href="http://mymvs.info/tx/{{tx.tx}}" class="hash" rel="nofollow" target="_blank">{{tx.tx}}</a>-->
+                        <a href="https://explorer.mvs.org/#!/tx/{{tx.tx}}" class="hash" rel="nofollow" target="_blank">{{tx.tx}}</a>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    {{else}}
+    <h3>No payouts yet</h3>
+    {{/if}}
+</div>

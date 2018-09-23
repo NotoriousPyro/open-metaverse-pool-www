@@ -1,0 +1,56 @@
+{{outlet 'error' }}
+<div class="jumbotron">
+    <div class="container">
+        <div class="alert alert-info" id="top-info">
+            <div class="row">
+                <div style="font-size: 14px; margin-left: 15px;">Miner: <a href="https://explorer.mvs.org/#!/adr/{{model.login}}" target="_blank"><strong>{{model.login}}</strong></a></div>
+                <div class="col-md-5 stats">
+                    <div>
+                        <i class="fa fa-cloud"></i> Immature Balance: <span>{{format-balance model.stats.immature}}</span><br/>
+                        <small>Block rewards awaiting maturity.<br/>It can take up to <strong>24 hours</strong> to see balance move from immature to mature.</small>
+                    </div>
+                    <div>
+                        <i class="fa fa-bank"></i> Mature Balance: <span>{{format-balance model.stats.balance}}</span><br/>
+                        <small>Block rewards awaiting payout. Processed every {{config.PayoutInterval}}.</small>
+                    </div>
+                    {{#if model.stats.pending}}
+                    <div><i class="fa fa-clock-o"></i> Current Payment: <span>{{format-balance model.stats.pending}}</span></div>
+                    {{/if}}
+                    <div><i class="fa fa-money"></i> Total Paid: <span>{{format-balance model.stats.paid}}</span></div>
+                    <div><i class="fa fa-paper-plane-o"></i> Total Payments: <span>{{format-number model.paymentsTotal}}</span></div>
+                </div>
+                <div class="col-md-4 stats">
+                    {{#if model.stats.lastShare}}
+                    <div><i class="fa fa-clock-o"></i>Last Share Submitted: <span>{{format-relative (seconds-to-ms model.stats.lastShare)}}</span></div>
+                    <div><i class="fa fa-tachometer"></i> Your Round Share: <span>{{format-number roundPercent style='percent' maximumFractionDigits='2'}}</span></div>
+                    {{/if}}
+                    <div><i class="fa fa-tachometer"></i> Hashrate (1h): <span>{{format-hashrate model.currentHashrate}}</span></div>
+                    <div><i class="fa fa-tachometer"></i> Hashrate (24h): <span>{{format-hashrate model.hashrate}}</span></div>
+                    <div><i class="fa fa-cubes"></i> Blocks Found: <span>{{format-number model.stats.blocksFound fallback='0'}}</span></div>
+                </div>
+                <div class="col-md-4 stats">
+                    <div><i class="fa fa-gears"></i> Workers Online: <span>{{format-number model.workersOnline}}</span></div>
+                    <div><i class="fa fa-gears"></i> Workers Offline: <span>{{format-number model.workersOffline}}</span></div>
+                    <div><strong><a href="/api/accounts/{{model.login}}">JSON API</a></strong></div>
+                    <div><strong><a href="https://graph.metaverse.farm/api/{{model.login}}.json">Graph JSON API</a></strong></div>
+                </div>
+            </div>
+            <!--<br style="clear: both;"/>-->
+            {{partial "paymentinfo"}}
+        </div>
+    </div>
+</div>
+<div class="container mainbody">
+    {{partial "alerts"}}
+    <iframe class="graph" id="hashrate-account" src="https://graph.metaverse.farm/hashrate-account.html#{{model.login}}" scrolling="no" border="0" frameborder="0"></iframe>
+    <ul class="nav nav-tabs">
+        <div id="tabmenu" style="margin-top: -110px;"></div>
+        {{#active-li currentWhen='account.index' role='presentation'}}
+            {{#link-to 'account.index' (scroll-to '#tabmenu')}}Workers &#10096;<span class="badge alert-success">Online: {{model.workersOnline}}</span> <strong>&#124;</strong> <span class="badge alert-danger">Offline: {{model.workersOffline}}</span>&#10097;{{/link-to}}
+        {{/active-li}}
+        {{#active-li currentWhen='account.payouts' role='presentation'}}
+            {{#link-to 'account.payouts' (scroll-to '#tabmenu')}}Payouts{{/link-to}}
+        {{/active-li}}
+    </ul>
+</div>
+{{outlet}}

@@ -1,0 +1,66 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="alert alert-info" id="top-info">
+            <h3 style="margin-top: 0px;">Important</h3>
+            <ul>
+                <li>Don't forget to <strong>change your wallet address</strong>.</li>
+                <li>Wallet addresses are <strong>case sensitive</strong>.</li>
+                <li><strong>You will lose money</strong> if you do not enter the wallet address <strong>exactly</strong>.</li>
+                <li><strong>Sometimes payments get stuck</strong>, but once in <strong>pending</strong> and {{config.PayoutThreshold}} minimum they should leave within {{config.PayoutInterval}}. If they get stuck, please alert the admin via the About page.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container mainbody">
+    {{partial "alerts"}}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row"><div class="spinner"><img class="center-block" src="/logo2.png"></div></div>
+        </div>
+        <div class="col-md-6">{{partial "serveraddresses"}}</div>
+    </div>
+    <h4>Stratum mining on Windows for NVIDIA / AMD using Claymore</h4>
+    <p>
+        Get the latest miner from, <a href="https://bitcointalk.org/index.php?topic=1433925.0" target="_blank">Claymore's bitcoin talk thread</a> and copy to a folder. Create a new text document and paste into it the following:
+        <pre>setx GPU_FORCE_64BIT_PTR 1
+setx GPU_MAX_HEAP_SIZE 100
+setx GPU_USE_SYNC_OBJECTS 1
+setx GPU_MAX_ALLOC_PERCENT 100
+setx GPU_SINGLE_ALLOC_PERCENT 100
+EthDcrMiner64.exe -epool stratum+tcp://nl.metaverse.farm:3004 -ewal MJWQyzhYo9iRGMyckdWXKF7tTJPY74W2ds -eworker workername -esm 1 -mode 1 -allpools 1 -allcoins 1 -nofee 1 -logfile metaverse.farm.log -epsw x
+</pre>
+        <strong>If you use AMD</strong> you may be able to get better hashrates by adding to the command line:
+        <pre>-asm 1 or -asm 2</pre>
+        Rename the file and change the file extension from .txt to .bat (you might need to enable <a href="https://www.google.com/search?q=show+hidden+file+extensions" target="_blank">show hidden file extensions</a>), and then finally, run the file.
+    </p>
+    <p>Increase / decrease the port as desired according to the rig's hashrate. Higher hashrates will want to use a higher port. Bigger shares submitted infrequently is better than smaller shares submitted frequently. Submitting many shares will result in more stale shares being submitted so wasting your bandwidth and rig power, it also makes your rig work harder if the difficulty isn't according to the rig.<br />Change wallet address after <strong>-ewal</strong></p>
+    
+    <h4>Stratum mining on EthOS for NVIDIA / AMD using Claymore</h4>
+    <p>
+        Edit your EthOS config similar to the below:
+        <pre>globalminer claymore
+stratumproxy enabled
+proxywallet MJWQyzhYo9iRGMyckdWXKF7tTJPY74W2ds
+proxypool1 stratum+tcp://nl.metaverse.farm:3004
+flags --cl-global-work 8192 --farm-recheck 200
+claymore=flags -allpools 1 -allcoins 1 -nofee 1 -esm 1 -mode 1 -epsw x
+</pre>
+    </p>
+    <h4>Nicehash Stratum settings</h4>
+    <dl class="dl-horizontal">
+        <dt style="margin-top: 10px">Algorithm</dt>
+        <dd><pre>DaggerHashimoto</pre></dd>
+        <dt style="margin-top: 10px">Stratum hostname or IP</dt>
+        <dd><pre>nl.metaverse.farm</pre></dd>
+        <dt style="margin-top: 10px">Port</dt>
+        <dd><pre>3014</pre></dd>
+        <dt style="margin-top: 10px">Username format</dt>
+        <dd><pre>walletaddress.workername</pre></dd>
+        <dt style="margin-top: 10px">Username example</dt>
+        <dd><pre>MJWQyzhYo9iRGMyckdWXKF7tTJPY74W2ds.nicehash</pre></dd>
+        <dt style="margin-top: 10px">Password</dt>
+        <dd><pre>#</pre></dd>
+        <dt></dt>
+        <dd><strong>Using # is important here!</strong></dd>
+    </dl>
+</div>

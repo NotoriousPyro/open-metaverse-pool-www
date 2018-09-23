@@ -1,0 +1,56 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="alert alert-info" id="top-info">
+            <div class="row">
+                <div class="col-md-5">
+                    <h3 style="margin-top: 0px;">Metaverse.farm ETP Mining Pool</h3>
+                    <ul>
+                        <li><strong>Pool Fee:</strong> <span id="poolFee" class="label label-success">{{config.PoolFee}}</span></li>
+                        <li><strong>Min. Payout Threshold:</strong> <span class="label label-success">{{config.PayoutThreshold}}</span></li>
+                        <li><strong>Payouts Every: </strong> <span class="label label-success">{{config.PayoutInterval}}</span></li>
+                        <li><strong>Block Reward System:</strong> <span class="label label-success">Proportional</span></li>
+                        <li><strong>Block Maturity:</strong> Up to <span class="label label-success">1000</span> blocks</li>
+                        <li><strong>Pool Pays:</strong> <span class="label label-success">FULL</span> block reward <strong>including</strong> Tx fees</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 stats">
+                    {{#if stats.model.stats.lastBlockFound}}
+                    <div><i class="fa fa-clock-o"></i> Last Block Found: <span>{{format-relative (seconds-to-ms stats.model.stats.lastBlockFound)}}</span></div>
+                    {{/if}}
+                    <div><i class="fa fa-clock-o"></i> Current Round Variance: <span>{{format-number stats.roundVariance}}&#37;</span></div>
+                    <div><i class="fa fa-unlock-alt"></i> Block Difficulty: <span>{{with-metric-prefix stats.difficulty 3}}</span></div>
+                    <div><i class="fa fa-bars"></i> Block Height: <span>{{format-number stats.height}}</span></div>
+                </div>
+                <div class="col-md-3 stats">
+                    <div><i class="fa fa-users"></i> Miners: <span id="poolHashrate">{{format-number stats.model.minersTotal}} &#124; {{format-hashrate stats.model.hashrate}}</span></div>
+                    <div><i class="fa fa-tachometer"></i> Network Hash Rate: <span>{{format-hashrate stats.hashrate}}</span></div>
+                    <div><i class="fa fa-clock-o"></i> Epoch Switch: <span>{{format-relative applicationController.nextEpoch}}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"><strong>For mining info/help</strong>, see the <a href="/#/help">Help</a> page.</div>
+                </div>
+            </div>
+            <div class="row" style="margin: 10px 10px 5px 10px;">
+                <h4>Your Stats &amp; Payment History</h4>
+                <div class="input-group">
+                    {{input value=cachedLogin class="form-control" placeholder="Enter Your Metaverse Address"}}
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" style="width: 200px;" type="button" {{action 'lookup' cachedLogin}}>
+                            <span style="display: inline;"><i class="fa fa-search"></i> Lookup</span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mainbody">
+    {{partial "alerts"}}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row"><img class="spinner center-block" src="/logo2.png"></div>
+        </div>
+        <div class="col-md-6">{{partial "serveraddresses"}}</div>
+    </div>
+    <iframe class="graph" id="hashrate" src="https://graph.metaverse.farm/hashrate.html" scrolling="no" border="0" frameborder="0"></iframe>
+</div>

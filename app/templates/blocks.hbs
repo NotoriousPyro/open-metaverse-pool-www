@@ -1,0 +1,36 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="alert alert-info" id="top-info">
+            <div class="row">
+                <div class="col-md-4 stats">
+                    <div><i class="fa fa-cubes"></i>Total Matured: <span class="label label-success">{{format-number model.maturedTotal}}</span></div>
+                    <div><i class="fa fa-clock-o"></i> Last Block Found: <span>{{format-relative (seconds-to-ms stats.model.stats.lastBlockFound)}}</span></div>
+                    {{#if stats.model.stats.lastBlockFound}}
+                    <div><i class="fa fa-clock-o"></i> Current Round Variance: <span>{{format-number stats.roundVariance}}&#37;</span></div>
+                    {{/if}}
+                    <div><i class="fa fa-bars"></i> Block Height: <span>{{format-number stats.height}}</span></div>
+                    <div><i class="fa fa-unlock-alt"></i> Block Difficulty: <span>{{with-metric-prefix stats.difficulty 3}}</span></div>
+                </div>
+            {{#if model.luck}}
+            {{partial "luck"}}
+            {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mainbody">
+    {{partial "alerts"}}
+    <ul class="nav nav-tabs">
+        <div id="tabmenu" style="margin-top: -110px;"></div>
+        {{#active-li currentWhen='blocks.index' role='presentation'}}
+            {{#link-to 'blocks.index' (scroll-to '#tabmenu')}}Mature{{/link-to}}
+        {{/active-li}}
+        {{#active-li currentWhen='blocks.immature' role='presentation'}}
+            {{#link-to 'blocks.immature' (scroll-to '#tabmenu')}}Immature <span class="label label-info">{{format-number model.immatureTotal}}</span>{{/link-to}}
+        {{/active-li}}
+        {{#active-li currentWhen='blocks.pending' role='presentation'}}
+            {{#link-to 'blocks.pending' (scroll-to '#tabmenu')}}New <span class="label label-default">{{format-number model.candidatesTotal}}</span>{{/link-to}}
+        {{/active-li}}
+    </ul>
+    {{outlet}}
+</div>
