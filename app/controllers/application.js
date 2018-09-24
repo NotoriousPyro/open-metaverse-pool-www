@@ -82,6 +82,19 @@ export default Ember.Controller.extend({
             return (percent * 100).toFixed(1);
         }
     }),
+    
+    getNextRewardReduction: Ember.computed('height', {
+        get() {
+            let blockIncrement = 500000;
+            let remainder = this.getWithDefault('height', 1) % blockIncrement;
+            let blocksLeftToNextReduction = blockIncrement - remainder;
+            
+            if (blocksLeftToNextReduction === blockIncrement) {
+                blocksLeftToNextReduction = 0;
+            }
+            return blocksLeftToNextReduction;
+        }
+    }),
 
     nextEpoch: Ember.computed('height', {
         get() {
