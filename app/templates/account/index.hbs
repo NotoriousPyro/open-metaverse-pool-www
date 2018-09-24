@@ -1,38 +1,38 @@
 <div class="container">
-	{{#if model.workers}}
-	<div class="table-responsive">
-		<table class="table table-condensed">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Hashrate (rough, 1h average)</th>
-					<th>Hashrate (accurate, 24h average)</th>
-					<th>Last Share</th>
-				</tr>
-			</thead>
-			<tbody>
-				{{#each-in model.workers as |k v|}}
-				<tr class="{{if v.offline "danger" "success"}}">
-					<td>{{k}}</td>
-					<td>{{format-hashrate v.hr}}</td>
-					<td>{{format-hashrate v.hr2}}</td>
-					<td>{{format-relative (seconds-to-ms v.lastBeat)}}</td>
-				</tr>
-				{{/each-in}}
-			</tbody>
-		</table>
-	</div>
-	{{else}}
-	<h4>No workers online</h4>
-	{{/if}}
-	<div class="alert alert-info" role="alert">
-		<ul>
-			<li>Your average hashrate will be smoothly adjusted until you have shares to fullfill estimation window.</li>
-			<li>There are two windows, <strong>Rough</strong>: equal to 1 hour; and <strong>Accurate</strong>: equal to 24 hours.</li>
-			<li>Dead workers will be highlighted in <span class="badge alert-danger">red</span> if they haven't submitted a share for 1/2 of short window.</li>
-			<li>Dead workers offline for more than 24 hours will be removed from the list.</li>
-			<li>The hashrate displayed in your miner application is a raw theoretical hashrate.</li>
-			<li>It is not as accurate as the hashrate shown on Metaverse.farm, and is not indicative of hashrate calculated from valid shares.</li>
-		</ul>
-	</div>
+    {{#if model.workers}}
+    <div class="table-responsive">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Hashrate (rough, 1h average)</th>
+                    <th>Hashrate (accurate, 24h average)</th>
+                    <th>Last Share</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each-in model.workers as |k v|}}
+                <tr class="{{if v.offline "danger" "success"}}">
+                    <td>{{k}}</td>
+                    <td>{{format-hashrate v.hr}}</td>
+                    <td>{{format-hashrate v.hr2}}</td>
+                    <td>{{format-relative (seconds-to-ms v.lastBeat)}}</td>
+                </tr>
+                {{/each-in}}
+            </tbody>
+        </table>
+    </div>
+    {{else}}
+    <h4>No workers online</h4>
+    {{/if}}
+    <div class="alert alert-info" role="alert">
+        <ul>
+            <li>Your average hashrate will be smoothly adjusted until you have shares to fullfill estimation window.</li>
+            <li>There are two windows, <strong>Rough</strong>: equal to 1 hour; and <strong>Accurate</strong>: equal to 24 hours.</li>
+            <li>Dead workers will be highlighted in <span class="badge alert-danger">red</span> if they haven't submitted a share for 1/2 of short window.</li>
+            <li>Dead workers offline for more than 24 hours will be removed from the list.</li>
+            <li>The hashrate displayed in your miner application is a raw theoretical hashrate.</li>
+            <li>It is not as accurate as the hashrate shown on Metaverse.farm, and is not indicative of hashrate calculated from valid shares.</li>
+        </ul>
+    </div>
 </div>
