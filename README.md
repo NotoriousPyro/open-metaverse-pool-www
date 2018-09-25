@@ -26,11 +26,13 @@ Then use the following:
     npm install -g bower
     npm install
     bower install
-    ./build.sh
 
 Configure varnish using the example in <code>/examples/varnish.vcl</code> and set the port to open-metaverse-pool API
+
 Configure nginx using the example in <code>/examples/nginx.conf</code> and serve content from <code>/Your/Destination/Folder/dist</code>. Set the upstream port and IP to the varnish server.
 
-## Running
+## Running / Usage
 
 Now just start varnish, nginx, and make sure your API is up. If you get errors, please check folder permissions, missing folders and other common problems PRIOR to raising an issue. Issues raised with no prior debugging will be closed.
+
+To build the web application, use <code>./build.sh</code> after a fresh install or when you make a change.
