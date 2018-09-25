@@ -15,7 +15,7 @@ export default Ember.Route.extend({
             for (let node of data.nodes) {
                 node.difficulty = parseInt(node.difficulty);
                 node.height = parseInt(node.height);
-                node.lastBeat = parseInt(node.height);
+                node.lastBeat = parseInt(node.lastBeat);
                 for (let stratum of node.stratums) {
                     stratum.difficulty = parseInt(stratum.difficulty);
                     stratum.minerCount = parseInt(stratum.minerCount);
