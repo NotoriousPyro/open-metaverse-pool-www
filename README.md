@@ -4,12 +4,14 @@ Accompanies open-metaverse-pool and can serve as an example or a framework for y
 
 ## Prerequisites
 
+These are supported, other versions are unsupported.
+
 * [open-metaverse-pool](https://github.com/NotoriousPyro/open-metaverse-pool)
-* Ubuntu 16.04.5 LTS
-* nodejs (on Ubuntu 16.04.5 LTS, install <code>nodejs-legacy</code>)
-* git
-* nginx
-* Varnish HTTP Cache
+* Ubuntu - 16.04.5 LTS
+* nodejs - 4.6.x (on Ubuntu 16.04.5 LTS, install <code>nodejs-legacy</code>)
+* git - all versions supported
+* nginx - 1.9.x and above
+* Varnish HTTP Cache - 4.1.x and above
 
 ## Installation
 
