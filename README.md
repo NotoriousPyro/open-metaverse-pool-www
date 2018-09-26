@@ -8,8 +8,8 @@ These are supported, other versions are unsupported.
 
 * [open-metaverse-pool](https://github.com/NotoriousPyro/open-metaverse-pool)
 * Ubuntu - 16.04.5 LTS
-* nodejs - 4.6.x (on Ubuntu 16.04.5 LTS, install <code>nodejs-legacy</code>)
 * git - all versions supported
+* nodejs - 4.6.x (on Ubuntu 16.04.5 LTS, install <code>nodejs-legacy</code>)
 * nginx - 1.9.x and above
 * Varnish HTTP Cache - 4.1.x and above
 
@@ -29,9 +29,9 @@ Then use the following:
     npm install
     bower install
 
-Configure varnish using the example in <code>/examples/varnish.vcl</code> and set the port to open-metaverse-pool API
+Configure varnish using the example in <code>examples/varnish.vcl</code> and set the port to open-metaverse-pool API
 
-Configure nginx using the example in <code>/examples/nginx.conf</code> and serve content from <code>/Your/Destination/Folder/dist</code>. Set the upstream port and IP to the varnish server.
+Configure nginx using the example in <code>examples/nginx.conf</code> and serve content from <code>/Your/Destination/Folder/dist</code>. Set the upstream port and IP to the varnish server.
 
 ## Running / Usage
 
